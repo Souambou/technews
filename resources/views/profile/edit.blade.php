@@ -38,6 +38,10 @@
         </div>
         <div class="tab-content profile-tab-cont">
             <div class="tab-pane fade show active" id="per_details_tab">
+                 @if(session('status'))
+                 <div class="alert alert-success">{{session('status')}}</div>
+                 @endif
+                 
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
