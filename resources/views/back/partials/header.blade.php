@@ -2,7 +2,7 @@
     <div class="header-left">
       <a href="index.html" class="logo">
         <img
-          src="{{asset('back_auth/asset/img/logo.png')}}"
+          src="{{ asset('back_auth/asset/profiles/'.Auth::user()->image)}} "
           width="50"
           height="70"
           alt="logo"
@@ -11,13 +11,14 @@
       </a>
       <a href="index.html" class="logo logo-small">
         <img
-          src="assets/img/logo.png"
+          src=" {{asset('back_auth/asset/profiles/'.Auth::user()->image)}} "
           alt="Logo"
           width="30"
           height="30"
         />
       </a>
     </div>
+    
     <a href="javascript:void(0);" id="toggle_btn">
       <i class="fe fe-text-align-left"></i>
     </a>
@@ -29,7 +30,7 @@
           <span class="user-img"
             ><img
               class="rounded-circle"
-              src="{{asset('back_auth/asset/img/profiles/avatar-01.png')}}"
+              src="{{asset('back_auth/asset/profiles/'.Auth::user()->image)}}"
               width="31"
               alt="John Doe"
           /></span>
@@ -38,7 +39,7 @@
           <div class="user-header">
             <div class="avatar avatar-sm">
               <img
-                src="{{asset('back_auth/asset/img/profiles/avatar-01.png')}}"
+                src="{{asset('back_auth/asset/profiles/'.Auth::user()->image)}}"
                 alt="User Image"
                 class="avatar-img rounded-circle"
               />
@@ -50,7 +51,11 @@
           </div>
           <a class="dropdown-item" href="{{route('profile.edit')}}">Profile</a>
           <a class="dropdown-item" href="settings.html">Paramettre</a>
-          <a class="dropdown-item" href="login.html">Deconnexion</a>
+           <form action="{{route('logout')}}" method="POST">
+            @csrf
+            <button  class="btn dropdown-item ">Deconnexion</button>
+             
+           </form>
           
         </div>
       </li>

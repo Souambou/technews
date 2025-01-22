@@ -47,16 +47,14 @@ class ProfileController extends Controller
              //Récuperation de l'image
 
              $ext=$request->file('image')->extension();
-             $file_name=date('YmdHis').'.'.$ext;  
-             $request->file('image')->move(public_path('back_auth/asset/profiles'));          
+             $file_name= date ('YmdHis').'.'.$ext;  
+             $request->file('image')->move(public_path('back_auth/asset/profiles'), $file_name);          
              $request->user()->image=$file_name;
              $request->user()->name=$request->name;
-             $request->user()->image=$request->email;
-            $request->user()->save(); 
-            return Redirect::route('profile.edit')->with('status', 'profil modifié avec succès ');
-
+             $request->user()->email=$request->email;
+             $request->user()->save();
+             return Redirect::route('profile.edit')->with('status', 'profil modifié avec succès ');
          } 
-
 
     /**
      * Delete the user's account.

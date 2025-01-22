@@ -2,8 +2,6 @@
 @section('title',"page de connexion")
 
 @section('auth-form')
-
-
 <h1>Connexion</h1>
 <p class="account-subtitle">Acceder au dashboard</p>
 <form action="{{route('login')}}" method="POST">
@@ -14,13 +12,11 @@
             <p class="text-red-500 mt-2">{{$message}}</p>
         @enderror
     </div>
-
+    
     <div class="form-group">
         <input class="form-control" type="password" name="password" placeholder="Mot de passe"> 
         @error('password')
-        <p class="text-red-500 mt-2">{{$message}}</p>
-
-
+           <p class="text-red-500 mt-2">{{$message}}</p>
         @enderror
 
     </div>
@@ -31,5 +27,6 @@
 <div class="text-center forgotpass"><a href="{{route('password.email')}}">Mot de passe oublie?</a> </div>
 
 <div class="text-center dont-have">Vous n'avez pas de compt? <a href="{{route('register')}}">S'inscrire</a></div>
+@endsection  
 
-@endsection
+

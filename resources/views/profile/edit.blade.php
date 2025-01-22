@@ -24,7 +24,7 @@
         <div class="profile-header">
             <div class="row align-items-center">
                 <div class="col-auto profile-image">
-                    <a href="#"> <img class="rounded-circle" alt="User Image" src="assets/img/profiles/avatar-01.png"> </a>
+                    <a href="#"> <img class="rounded-circle" alt="User Image" src="{{asset('back_auth/asset/profiles/'.Auth::user()->image) }}"> </a>
                 </div>
                 <div class="col ml-md-n2 profile-user-info">
                     <h4 class="user-name mb-3">Bienvenue <strong>{{ Auth::user()->name}} </strong></h4>
@@ -34,14 +34,13 @@
             </div>
         </div>
         <div class="profile-menu">
-           
         </div>
         <div class="tab-content profile-tab-cont">
             <div class="tab-pane fade show active" id="per_details_tab">
                  @if(session('status'))
                  <div class="alert alert-success">{{session('status')}}</div>
                  @endif
-                 
+
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">

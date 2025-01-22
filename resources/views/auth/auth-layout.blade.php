@@ -32,7 +32,6 @@
 	<script src="{{asset('back_auth/asset/js/popper.min.js')}}"></script>
 	<script src="{{asset('a/js/asset/bootstrap.min.js')}}"></script>
 	<script src="{{asset('back_auth/asset/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
-	<script src="asset('back_auth/js/asset/script.js')"></script>
-
+	<script src="{{asset('back_auth/js/asset/script.js')}}"></script>
 </body>
 </html>
