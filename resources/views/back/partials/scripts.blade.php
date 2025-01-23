@@ -6,3 +6,4 @@
 <script src="{{asset('back_auth/asset/plugins/morris/morris.min.js')}}"></script>
 <script src="{{asset('back_auth/asset/js/chart.morris.js')}}"></script>
 <script src="{{asset('back_auth/asset/js/script.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>

@@ -13,12 +13,13 @@
 @section('dashboard-content')
 <div class="row">
     <div class="col-lg-12">
-      <form>
+      <form action="{{route('category.store')}}" method="POST">
+        @csrf
         <div class="row formtype">
           <div class="col-md-4">
             <div class="form-group">
               <label>Nom de la categorie</label> 
-              <input
+              <input name="name"
                 class="form-control"
                 type="text"
               />
@@ -32,7 +33,7 @@
                 class="form-control"
                 rows="5"
                 id="comment"
-                name="text"
+                name="description"
               ></textarea>
             </div>
           </div>
@@ -40,9 +41,9 @@
           <div class="col-md-4">
                 <div class="form-group">
                     <label>Activation</label>
-                    <select class="form-control" id="sel2" name="sellist1">
-                        <option>Activer</option>
-                        <option>Ne pas activer</option>
+                    <select class="form-control" id="sel2" name="isActive">
+                        <option value="1">Activer</option>
+                        <option value="0">Ne pas activer</option>
                     </select>
                 </div>
             </div>
