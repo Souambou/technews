@@ -61,8 +61,8 @@
 
          })   
     </script> 
-
     <script src="https://provider.alert ">
+    
     </script>
  @endif 
 

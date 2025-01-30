@@ -1,6 +1,8 @@
 <?php
 
+
 use App\Http\Controllers\Category\CategoryController;
+use App\Http\Controllers\Article\ArticleController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,11 +32,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php'; 
+
 
 //partie categories
 Route::resource('/category', CategoryController::class);  
 
+//partie articles
+Route::resource('/article', ArticleController::class);
+
+require __DIR__.'/auth.php'; 
 
 
 

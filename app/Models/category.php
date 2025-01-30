@@ -19,10 +19,14 @@ class category extends Model
 
     ];
 
+
     public function getSlugOptions(): SlugOptions
     {
          return SlugOptions::create()
         ->generateSlugsFrom('name')
-        ->saveSlugsTo('slug');
+        ->saveSlugsTo('slug')
+        ->doNotGenerateSlugsOnUpdate(); 
+         
+         
     }
 }

@@ -45,11 +45,11 @@ class CategoryController extends Controller
              'isActive'=>'required|boolean'
         ]);
           
-         category::create($request->all());
+         category::create($validateData);
           return  redirect()->route('category.index')->with('success','la catégorie a été ajoutée avec succès');
 
     }
-    
+
     /**
      * Display the specified resource.
      */
@@ -63,7 +63,7 @@ class CategoryController extends Controller
      */
     public function edit(category $category)
     {
-      
+         return view('back.category.create', compact('category'));
 
     }
 
@@ -71,21 +71,25 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      */
 
-    public function update(UpdatecategoryRequest $request, category $category)
+    public function update(Request $request, category $category)
     {
-        //
+         $request->validate([
+               'name'=>'required|string|max:255',
+              'description'=>'string|nullable',
+              'isActive'=>'required|boolean'
+         ]);
+         
+        $category->update($request->all());
+        return redirect()->route('category.index')->with('success','catégorie modifiée avec succès');
     }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(category $category)
-    {
-        
+    { 
+          $category->delete();
+          return back()->with('success','categorie supprimée avec succès');
     }
-
-    
-
-
 }
 
