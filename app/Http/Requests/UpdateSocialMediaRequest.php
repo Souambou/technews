@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorecategoryRequest extends FormRequest
+class UpdateSocialMediaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,21 +22,9 @@ class StorecategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-              'name'=>['required','string', 'max:255'],
-              'description'=>['string','nullable'],
-              'isActive'=>['required','boolean'] 
-                
+            'name'=>['required','string','max:255'],
+            'lien'=>['required','string'],
+             'icon'=>['required','string']
         ];
     }
-  }
-
-  
-
-
-
-
-
-
-
-
-
+}

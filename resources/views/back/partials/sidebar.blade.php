@@ -16,7 +16,7 @@
             ></a>
             <ul class="submenu_class" style="display: none">
               <li><a href=" {{route('article.index')}} "> Tous les articles </a></li>
-              <li><a href="add-article.html"> Ajouter un article </a></li>
+              <li><a href="{{route('article.create')}}"> Ajouter un article </a></li>
             </ul>
           </li>
           <li class="submenu">
@@ -41,9 +41,9 @@
               <span class="menu-arrow"></span
             ></a>
             <ul class="submenu_class" style="display: none">
-              <li><a href="all-author.html">Tous les auteurs </a></li>
+              <li><a href="{{route('author.index')}}">Tous les auteurs </a></li>
               <li>
-                <a href="add-author.html"> Ajouter un auteur </a>
+                <a href="{{route('author.create')}}"> Ajouter un auteur </a>
               </li>
             </ul>
           </li>
@@ -59,8 +59,8 @@
               <span> Medias Sociaux </span> <span class="menu-arrow"></span
             ></a>
             <ul class="submenu_class" style="display: none">
-              <li><a href="all-social-media.html">Tous les medias </a></li>
-              <li><a href="add-social-media.html">Ajouter un media </a></li>
+              <li><a href="{{route('social.index')}}">Tous les medias </a></li>
+              <li><a href="{{route('social.create')}}">Ajouter un media </a></li>
             </ul>
           </li>
 

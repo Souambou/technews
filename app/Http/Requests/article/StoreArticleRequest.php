@@ -23,8 +23,8 @@ class StoreArticleRequest extends FormRequest
     {
         return [
             
-            'title'=>['string','required','max:255'],
-              'description'=>['string','required'],
+               'title'=>['string','required','max:255'],
+               'description'=>['string','required'],
                'image'=>['string','mimes:png,jpg,jpeg','nullable', 'max:2048'],
                  'isComment'=>['required'],
                  'isSharable'=>['required'],
@@ -33,3 +33,7 @@ class StoreArticleRequest extends FormRequest
         ];
     }
 }
+
+
+
+

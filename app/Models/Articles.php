@@ -4,22 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
 class Articles extends Model
 {
-    use HasFactory HasSlug;
+    use HasFactory,HasSlug;
 
-    protected $fillable[
+    protected $fillable = [
         'title',
         'slug',
         'image',
         'description',
-        'isActive',
+        'isActive',                                                                                                                                                                                                                                 
         'isComment', 
         'isSharable',
-
          'category_id',
          'author_id'
     ];
@@ -36,4 +36,11 @@ class Articles extends Model
     {   
         return 'slug';
     }
+
+    
+    public function imageUrl():string{
+
+        return Storage::Url($this->image);
+    }
 }
+
