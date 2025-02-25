@@ -15,7 +15,10 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return view('back.article.index');
+        return view('back.article.index',
+    [
+         'articles'=>Articles::all()
+    ]);
     }
 
 
@@ -31,47 +34,42 @@ class ArticleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreArticleRequest $request)
 {
-    // Validation des données
-    $validated = $request->validate([
-        'slug' => 'required|string|max:255',
-        'description' => 'required|string',
-        'isActive' => 'required|boolean',
-        'isComment' => 'required|boolean',
-        'isSharable' => 'required|boolean', 
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'category_id' => 'required|integer|exists:categories,id',
-    ]);
-   
-    // Gestion de l'upload de l'image
-    $imagePath = null;
-    if ($request->hasFile('image')) {
-        $imagePath = $request->file('image')->store('assets', 'public');
-    }
-     // Création de l'article
-    Articles::create([
-        'title' => $validated['title'],
-        'description' => $validated['description'],
-        'isActive' => $validated['isActive'],
-        'isComment' => $validated['isComment'],
-        'isSharable' => $validated['isSharable'],
-        'image' => $imagePath,
-        'category_id' => $validated['category_id'],
-        'author_id' => Auth::id(),
-    ]);
+    
+    $request->validated($request->all());
+        // Traitement de l'image
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/images', $imageName); // Stocke l'image dans le dossier `storage/app/public/images`
+            $imagePath = 'storage/images/' . $imageName;
+        } else {
+            $imagePath = null;
+        }
+    
 
-    return redirect()->route('article.index')->with('success', 'Article publié avec succès');
+    Articles::create([
+        'title'=>$request->title,
+        'description'=>$request->description,
+        'isActive'=>$request->isActive,
+        'isComment'=>$request->isComment,
+         'isSharable'=>$request->isSharable,
+         'category_id'=>$request->category_id,
+          'author_id'=>Auth::user()->id,
+          'image' => $imagePath, // Enregistre le chemin de l'image
+    ]);
+    return redirect()->route('article.index')->with('success', 'Article créé avec succès.');
+  
+    
+
+
 }
 
     /**
      * Display the specified resource
      */
-    public function show(string $id)
-    {
-           
-    }
-
+ 
     /**
      * Show the form for editing the specified resource.
      */

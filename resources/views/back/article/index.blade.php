@@ -37,46 +37,72 @@
                                 <th>Auteur</th>
                                 <th class="text-right">Actions</th>
                             </tr>
+
                         </thead>
                         <tbody>
+
+                            @foreach ($articles as  $article)
+                            
                             <tr>
-                                <td>ART-0001</td>
-                                <td></td>
-                                <td>Titre de l'article</td>
-                                <td>Categorie</td>
-                                <td>21-03-2020</td>
+                                <td>ART-000{{$article->id}}</td>
                                 <td>
-                                    <div class="actions"> <a href="#" class="btn btn-sm bg-success-light mr-2">Publié</a> </div>
+                                     <img src="{{asset($article->image)}}" alt="{{$article->title}}"  width="70" height="50">
                                 </td>
-        <td>
-          <div class="actions"> <a href="#" class="btn btn-sm bg-success-light mr-2">Active</a> </div>
-        </td>
-        <td>
-          <div class="actions"> <a href="#" class="btn btn-sm bg-success-light mr-2">Active</a> </div>
-        </td>
+                                <td>{{$article->title}}</td>
+                                <td>{{$article->category->name}}</td>
+                                <td>
+                                    <div class="actions"> 
+                                        @if($article->isActive==1)
+                                        <a href="#" class="btn btn-sm bg-success-light mr-2">Publié</a> 
+                                        @else
+                                        <a href="#" class="btn btn-sm bg-success-light mr-2">Non Publié</a> 
+                                        @endif 
+                                    
+                                    </div>
+                                </td>
+                                    <td>
+                                    <div class="actions"> 
+                                        @if($article->isSharable==1)
+                                        <a href="#" class="btn btn-sm bg-success-light mr-2">Active</a> 
+                                        @else
+                                           <a href="#" class="btn btn-sm bg-success-light mr-2">Désactiver</a>
+                                        @endif
+                                    </div>
+                                    </td>
+                                    <td>
+                                    <div class="actions">
+                                        @if($article->isComment==1)
+                                         <a href="#" class="btn btn-sm bg-success-light mr-2">Active</a>
+                                         @else
+                                         <a href="#" class="btn btn-sm bg-success-light mr-2">Désactiver</a>
+                                         @endif
+                                        </div>
+                                    </td>
                                 <td>
                                     <h2 class="table-avatar">
-                                    <a href="profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/profiles/avatar-03.jpg" alt="User Image"></a>
-                                    <a href="profile.html">Tommy Bernal <span>#0001</span></a>
+                                    <a href="profile.html" class="avatar avatar-sm mr-2">
+                                        <img class="avatar-img rounded-circle" src="{{asset('back_auth/asset/profiles/'.$article->author->image) }}" alt="User Image"></a>
+                                    <a href="profile.html">{{$article->author->name}} <span>#0001</span></a>
                                     </h2>
                                 </td>
                                 <td class="text-right">
                                     <div class="dropdown dropdown-action"> 
-            <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v ellipse_color"></i>
-            </a>
-                                        <div class="dropdown-menu dropdown-menu-right"> 
-              <a class="dropdown-item" href="edit-article.html">
-                <i class="fas fa-pencil-alt m-r-5"></i> Voir
-              </a>
-              <a class="dropdown-item" href="edit-article.html">
-                <i class="fas fa-pencil-alt m-r-5"></i> Modifier
-              </a> 
-              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_asset"><i class="fas fa-trash-alt m-r-5"></i> Supprimer
-              </a> 
-            </div>
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v ellipse_color"></i>
+                                    </a>
+                                                                <div class="dropdown-menu dropdown-menu-right"> 
+                                    <a class="dropdown-item" href="edit-article.html">
+                                        <i class="fas fa-pencil-alt m-r-5"></i> Voir
+                                    </a>
+                                    <a class="dropdown-item" href="edit-article.html">
+                                        <i class="fas fa-pencil-alt m-r-5"></i> Modifier
+                                    </a> 
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_asset"><i class="fas fa-trash-alt m-r-5"></i> Supprimer
+                                    </a> 
+                                    </div>
                                     </div>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

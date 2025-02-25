@@ -4,6 +4,7 @@
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Article\ArticleController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SocialMediaController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -49,6 +50,11 @@ Route::resource('/author',UserController::class);
 //partie media social
 
 Route::resource('/social', SocialMediaController::class);
+
+//partie paramettrage du site
+
+Route::get('/paramettre',[SettingsController::class,'index'])->name('settings.index');
+Route::put('/modifier/parametre',[SettingsController::class,'update'])->name('settings.update');
 
 
 require __DIR__.'/auth.php'; 

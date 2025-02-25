@@ -12,6 +12,7 @@ class StoreSocialMediaRequest extends FormRequest
     public function authorize(): bool
     {
         return true;
+        
     }
 
     /**
@@ -22,9 +23,12 @@ class StoreSocialMediaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>['required','string','max:255'],
-             'lien'=>['required','string'],
-              'icon'=>['required','string']
+            'name'=>['required','string'],
+            'lien'=>['required','string'],
+            'icon'=>['required','string']
         ];
     }
 }
+
+
+

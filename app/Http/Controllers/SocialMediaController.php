@@ -27,48 +27,60 @@ class SocialMediaController extends Controller
         return view('back.social.create');
     }
 
+
     /**
      * Store a newly created resource in storage.
      */
+
     public function store(StoreSocialMediaRequest $request)
     {
         $request->validated($request->all());
         SocialMedia::create($request->all());
+        return redirect()->route('social.index')->with('success',' reseau ajouté avec succès'); 
 
-        return redirect()->route('social.index')->with('success',' reseau ajouté avec succès');
-
-     
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(SocialMedia $socialMedia)
+    public function edit(SocialMedia $social)
     {
-        //
+          return view('back.social.create', compact('social'));
+
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SocialMedia $socialMedia)
-    {
-        //
-    }
+    // public function edit(SocialMedia $socialMedia)
+    // {
+    //     //
+    // }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSocialMediaRequest $request, SocialMedia $socialMedia)
+    public function update(UpdateSocialMediaRequest $request, SocialMedia $social)
     {
-        //
+         $request->validated($request->all());
+         $social->update($request->all());
+         return redirect()->route('social.index')->with('success',' reseau modifié avec succès');
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SocialMedia $socialMedia)
+
+    public function destroy(SocialMedia $social)
     {
-        //
-    }
+          $social->delete();
+          return redirect()->route('social.index')->with('success','reseau supprimé avec succès '); 
+    }  
 }
+
+
+
+
+
+

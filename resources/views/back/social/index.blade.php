@@ -39,16 +39,24 @@
                             <tr>
                                 <td>LIEN-0001{{$social->id}}</td>
                                 <td><i class="{{$social->icon}}"></i></td>
-                                <td>Facebook</td>
-                                <td><a href="{{$social->lien}}"></a></td>
+                                <td>{{$social->name}}</td>
+                                <td><a href="">{{$social->lien}}</a></td>
                                 <td class="text-right">
                                     <div class="dropdown dropdown-action"> <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v ellipse_color"></i></a>
-                                        <div class="dropdown-menu dropdown-menu-right"> <a class="dropdown-item" href="edit-categorie.html"><i class="fas fa-pencil-alt m-r-5"></i> Modifier</a> <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_asset"><i class="fas fa-trash-alt m-r-5"></i> Supprimer</a> </div>
+                                        <div class="dropdown-menu dropdown-menu-right"> <a class="dropdown-item" href="{{route('social.edit', $social)}}"><i class="fas fa-pencil-alt m-r-5"></i> Modifier</a> 
+                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_asset">
+                                               
+                                                 <form action="{{route('social.destroy', $social)}}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE');
+                                                    <button type="submit" class="btn btn-red"><i class="fas fa-trash-alt m-r-5"></i> Supprimer</button>
+                                                 </form>
+                                                </a>
+                                                 </div>
                                     </div>
                                 </td>
                          </tr>
                          @endforeach
-
                         </tbody>
                     </table>
                 </div>

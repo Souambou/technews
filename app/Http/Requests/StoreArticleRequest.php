@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateSocialMediaRequest extends FormRequest
+class StoreArticleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,14 @@ class UpdateSocialMediaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>['required','string'],
-            'lien'=>['required','string'],
-             'icon'=>['required','string']
+            
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'isActive' => 'required|boolean',
+            'isComment' => 'required|boolean',
+            'isSharable' => 'required|boolean',
+            'category_id' => 'required|exists:categories,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
         ];
     }
 }

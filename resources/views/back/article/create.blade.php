@@ -6,7 +6,7 @@
 
 <div class="row align-items-center">
     <div class="col">
-        <h3 class="page-title mt-5">Modifier un article</h3> </div>
+        <h3 class="page-title mt-5">Ajouter un article </h3> </div>
 </div>
 
 @endsection
@@ -14,8 +14,8 @@
 @section('dashboard-content')
 <div class="row">
 <div class="col-lg-12">
-<form method="POST" action="{{route('article.store')}}"   enctype="multipart/form-data">
-            @csrf 
+<form action="{{ route('article.store')  }}" method="POST"   enctype="multipart/form-data">
+ @csrf 
 <div class="row formtype">
   <div class="col-md-4">
     <div class="form-group">

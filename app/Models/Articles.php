@@ -24,23 +24,31 @@ class Articles extends Model
          'author_id'
     ];
 
+
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
-        ->generateSlugsFrom('name')
-        ->saveSlugsTo('slug');
+         ->generateSlugsFrom('title')
+         ->saveSlugsTo('slug');
     }
 
-    public function getRouteKey():string
+    // public function imageUrl():string
+    // {
+    //     return Storage::url($this->image);
+    // }
 
-    {   
-        return 'slug';
+    public function getRouteKeyName():string
+    {
+         return 'slug';
     }
 
+    public function category(){
+         return $this->belongsTo(category::class,'category_id','id');
+    }
+
+    public function author(){
+         return $this->belongsTo(User::class,'author_id','id');
+    }
     
-    public function imageUrl():string{
-
-        return Storage::Url($this->image);
-    }
 }
 
