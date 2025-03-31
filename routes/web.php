@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Article\ArticleController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SocialMediaController;
@@ -24,9 +25,7 @@ Route::get('/',function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('back.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class,'index'])->middleware(['auth', 'verified', 'checkRole: admin,author'])->name('dashboard');
 
 
 Route::middleware('auth')->group(function () {
@@ -38,22 +37,22 @@ Route::middleware('auth')->group(function () {
 
 
 //partie categories
-Route::resource('/category', CategoryController::class);  
+Route::resource('/category', CategoryController::class)->middleware('admin');  
 
 //partie articles
 Route::resource('/article', ArticleController::class);
 
 //partie des authors
 
-Route::resource('/author',UserController::class);
+Route::resource('/author',UserController::class)->middleware('admin');
 
 //partie media social
 
-Route::resource('/social', SocialMediaController::class);
+Route::resource('/social', SocialMediaController::class)->middleware('admin');
 
 //partie paramettrage du site
 
-Route::get('/paramettre',[SettingsController::class,'index'])->name('settings.index');
+Route::get('/paramettre',[SettingsController::class,'index'])->name('settings.index')->middleware('admin');
 Route::put('/modifier/parametre',[SettingsController::class,'update'])->name('settings.update');
 
 

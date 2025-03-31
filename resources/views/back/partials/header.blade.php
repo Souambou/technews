@@ -1,6 +1,6 @@
 <div class="header">
     <div class="header-left">
-      <a href="index.html" class="logo">
+      <a href="{{route('profile.edit')}}" class="logo">
         <img
           src="{{ asset('back_auth/asset/profiles/'.Auth::user()->image)}} "
           width="50"
@@ -9,7 +9,7 @@
         />
         <span class="logoclass">John Doe</span>
       </a>
-      <a href="index.html" class="logo logo-small">
+      <a href="{{route('profile.edit')}}" class="logo logo-small">
         <img
           src=" {{asset('back_auth/asset/profiles/'.Auth::user()->image)}} "
           alt="Logo"
@@ -50,7 +50,7 @@
             </div>
           </div>
           <a class="dropdown-item" href="{{route('profile.edit')}}">Profile</a>
-          <a class="dropdown-item" href="settings.html">Paramettre</a>
+          <a class="dropdown-item" href="{{route('settings.index')}}">Paramettre</a>
            <form action="{{route('logout')}}" method="POST">
             @csrf
             <button  class="btn dropdown-item ">Deconnexion</button>

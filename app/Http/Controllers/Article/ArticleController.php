@@ -7,7 +7,6 @@ use App\Models\Articles;
 use App\Models\category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
 class ArticleController extends Controller
 {
     /**
@@ -15,88 +14,88 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return view('back.article.index',
-    [
-         'articles'=>Articles::all()
-    ]);
+       //afficher tous les articles si le rôle de l'utilisateur est admin
+     
+       if(Auth::user()->role=='admin'){
+           $articles=Articles::all();
+       }
+       else{
+          $articles=Articles::where('author_id',Auth()->user()->id)->get();
+       }
+       return view('back.article.index', compact('articles'));
+    
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
-    {
-        return view('back.article.create',['categories'=>category::where('isActive',1)->get()]);
+    {   
+        return view('back.article.create',
+        ['categories'=>category::where('isActive',1)->get()]
+    );
     }
-
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(StoreArticleRequest $request)
-{
-    
-    $request->validated($request->all());
-        // Traitement de l'image
+   {
+        $request->validated($request->all());
+        // Traitement de l'image   
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->storeAs('public/images', $imageName); // Stocke l'image dans le dossier `storage/app/public/images`
+            $image->storeAs('public/images', $imageName);// Stocke l'image dans le dossier `storage/app/public/images`
             $imagePath = 'storage/images/' . $imageName;
         } else {
             $imagePath = null;
         }
-    
 
-    Articles::create([
+
+      Articles::create([
         'title'=>$request->title,
         'description'=>$request->description,
         'isActive'=>$request->isActive,
         'isComment'=>$request->isComment,
-         'isSharable'=>$request->isSharable,
-         'category_id'=>$request->category_id,
-          'author_id'=>Auth::user()->id,
-          'image' => $imagePath, // Enregistre le chemin de l'image
+        'isSharable'=>$request->isSharable,
+        'category_id'=>$request->category_id,
+        'author_id'=>Auth::user()->id,
+        'image' => $imagePath, // Enregistre le chemin de l'image
     ]);
-    return redirect()->route('article.index')->with('success', 'Article créé avec succès.');
-  
-    
 
-
+     return redirect()->route('article.index')->with('success', 'Article créé avec succès.');
 }
+   
+    public function edit(Articles $article)
 
-    /**
-     * Display the specified resource
-     */
- 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
     {
-        
+          return view('back.article.create',
+          [
+             "article"=> $article,
+             'categories'=>category::where('isActive',1)->get()
+          ] 
+        );
+    }
+    public function show(Articles $article)
+    {
+        return view('back.article.show', ['article' => $article]);   
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-            
-    
-    }
-    
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        
+          
     }
 
-    
+    public function destroy(string $id)
+    {           
+
+    } 
 }
+
+
+
+
+
+
+
 
 
 

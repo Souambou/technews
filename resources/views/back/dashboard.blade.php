@@ -24,7 +24,7 @@
       <div class="card-body">
         <div class="dash-widget-header">
           <div>
-            <h3 class="card_widget_header">236</h3>
+            <h3 class="card_widget_header">{{ \Illuminate\Support\Facades\Auth::user()->role=='author'? $author_articles:$articles->count()}}</h3>
             <h6 class="text-muted">Total Articles</h6>
           </div>
           <div class="ml-auto mt-md-3 mt-lg-0">
@@ -58,7 +58,7 @@
       <div class="card-body">
         <div class="dash-widget-header">
           <div>
-            <h3 class="card_widget_header">10</h3>
+            <h3 class="card_widget_header"> {{$categories}}</h3>
             <h6 class="text-muted">Total Catégories</h6>
           </div>
           <div class="ml-auto mt-md-3 mt-lg-0">
@@ -159,12 +159,12 @@
     <div class="card card-table flex-fill">
       <div class="card-header">
         <h4 class="card-title float-left mt-2">Articles recents</h4>
-        <button
+        <a href="{{route('article.index')}}"
           type="button"
           class="btn btn-primary float-right veiwbutton"
         >
           Voir tous
-        </button>
+      </a>
       </div>
       <div class="card-body">
         <div class="table-responsive">
@@ -180,20 +180,26 @@
               </tr>
             </thead>
             <tbody>
+
+
+              @foreach ($recent_articles as $recent_article )
               <tr>
+                
                 <td class="text-nowrap">
-                  <div>ART-0001</div>
+                  <img src="{{asset($recent_article->image)}}" alt="" style="width: 100px">
+               
                 </td>
-                <td class="text-nowrap"></td>
-                <td>Intelligence artificielle</td>
-                <td>Tech</td>
-                <td class="text-center">John Doe</td>
+                <td>{{$recent_article->title}}</td>
+                <td>{{$recent_article->category->name}}</td>
+                <td class="text-center">{{$recent_article->author->name}}</td>
                 <td class="text-center">
                   <span class="badge badge-pill bg-success inv-badge"
                     >PUBLIE</span
                   >
                 </td>
               </tr>
+              @endforeach
+             
             </tbody>
           </table>
         </div>

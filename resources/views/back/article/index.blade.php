@@ -1,8 +1,5 @@
 @extends('back.app')
-
 @section('title','page des articles')
-
-
 @section('dashboard-header')
 <div class="row align-items-center">
     <div class="col">
@@ -12,12 +9,8 @@
 </div>
  </div>
 </div>
-
-
 @endsection
-
 @section('dashboard-content')
-
 <div class="row">
     <div class="col-sm-12">
         <div class="card card-table">
@@ -37,16 +30,13 @@
                                 <th>Auteur</th>
                                 <th class="text-right">Actions</th>
                             </tr>
-
                         </thead>
                         <tbody>
-
                             @foreach ($articles as  $article)
-                            
                             <tr>
                                 <td>ART-000{{$article->id}}</td>
                                 <td>
-                                     <img src="{{asset($article->image)}}" alt="{{$article->title}}"  width="70" height="50">
+                                     <img src="{{asset($article->image)}}" alt="{{$article->title}}"  width="100" height="100">
                                 </td>
                                 <td>{{$article->title}}</td>
                                 <td>{{$article->category->name}}</td>
@@ -90,10 +80,10 @@
                                     <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v ellipse_color"></i>
                                     </a>
                                                                 <div class="dropdown-menu dropdown-menu-right"> 
-                                    <a class="dropdown-item" href="edit-article.html">
+                                    <a class="dropdown-item" href="{{route('article.show', $article)}}">
                                         <i class="fas fa-pencil-alt m-r-5"></i> Voir
                                     </a>
-                                    <a class="dropdown-item" href="edit-article.html">
+                                    <a class="dropdown-item" href="{{route('article.edit',$article)}}">
                                         <i class="fas fa-pencil-alt m-r-5"></i> Modifier
                                     </a> 
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_asset"><i class="fas fa-trash-alt m-r-5"></i> Supprimer
@@ -109,7 +99,6 @@
             </div>
         </div>
     </div>
-</div> 
-      
+</div>    
 @endsection
 
